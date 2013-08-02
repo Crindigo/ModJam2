@@ -11,4 +11,6 @@ public class ItemTCG extends Item
 	{
 		super(itemId);
 	}
+	
+	
 }

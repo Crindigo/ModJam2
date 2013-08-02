@@ -1,0 +1,20 @@
+[
+{
+  "modid": "minetcg",
+  "name": "MineTCG",
+  "description": "Some kind of silly collectible card system that will eventually become a game. Developed for ModJam #2.",
+  "version": "0.1.0",
+  "url": "http://github.com/Crindigo/ModJam2",
+  "updateUrl": "",
+  "authorList": [
+    "Crindigo"
+  ],
+  "credits": "By Crindigo",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]

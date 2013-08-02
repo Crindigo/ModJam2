@@ -5,5 +5,7 @@ public class ItemDeck extends ItemTCG
 	public ItemDeck(int itemId)
 	{
 		super(itemId);
+		
+		this.setUnlocalizedName("tcgDeck");
 	}
 }
