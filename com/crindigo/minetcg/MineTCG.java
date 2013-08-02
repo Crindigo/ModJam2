@@ -1,8 +1,10 @@
-package com.crindigo.cardforge;
+package com.crindigo.minetcg;
 
 import java.io.File;
 
-import com.crindigo.cardforge.common.CommonProxy;
+import com.crindigo.minetcg.common.CommonProxy;
+import com.crindigo.minetcg.common.Config;
+import com.crindigo.minetcg.item.TCGItems;
 
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Mod;
@@ -13,38 +15,32 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(
-		modid = "cardforge",
-		name = "Cardforge",
+		modid = "minetcg",
+		name = "MineTCG",
 		version = "0.1.0"
 )
 @NetworkMod(
 		clientSideRequired = true,
 		serverSideRequired = false
 )
-public class Cardforge
+public class MineTCG
 {
 	@Instance
-	public static Cardforge instance;
+	public static MineTCG instance;
 	
-	@SidedProxy(clientSide = "com.crindigo.cardforge.client.ClientProxy", serverSide = "com.crindigo.cardforge.common.CommonProxy")
+	@SidedProxy(clientSide = "com.crindigo.minetcg.client.ClientProxy", serverSide = "com.crindigo.minetcg.common.CommonProxy")
 	public static CommonProxy proxy;
 	
 	private Configuration config;
 	
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		this.loadConfiguration(event.getSuggestedConfigurationFile());
-		
+		Config.init(event.getSuggestedConfigurationFile());
+		TCGItems.init();
 	}
 	
 	public void load(FMLInitializationEvent event)
 	{
 		
-	}
-	
-	private void loadConfiguration(File file)
-	{
-		this.config = new Configuration(file);
-		this.config.load();
 	}
 }
