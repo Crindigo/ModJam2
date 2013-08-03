@@ -1,5 +1,8 @@
 package com.crindigo.minetcg.item;
 
+import java.util.List;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,4 +33,15 @@ public class ItemCard extends ItemTCG
 		
 		return EnumRarity.common;
 	}
+
+	@Override
+	public void addInformation(ItemStack par1ItemStack,
+			EntityPlayer par2EntityPlayer, List par3List, boolean par4) 
+	{
+		Card card = Card.createFromItemStack(par1ItemStack);
+		par3List.add(String.format("Level %d (%d)", card.getStats().level, card.getStats().experience));
+		par3List.add("Element: " + card.getElement().name);
+		par3List.add(String.format("HP: %d, Pow: %d, Def: %d", card.getStats().health,
+				card.getStats().power, card.getStats().defense));
+	}	
 }

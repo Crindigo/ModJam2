@@ -14,6 +14,7 @@ import com.crindigo.minetcg.common.CommonProxy;
 import com.crindigo.minetcg.common.Config;
 import com.crindigo.minetcg.common.handler.EntityLivingHandler;
 import com.crindigo.minetcg.item.TCGItems;
+import com.crindigo.minetcg.util.RandomCardChestContent;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -55,8 +56,8 @@ public class MineTCG
 	{
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 		
-		WeightedRandomChestContent item = new WeightedRandomChestContent(par1, par2, par3, par4, par5)
-		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, item);
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, 
+				new RandomCardChestContent(null, 0, 0, 0));
 		
 		CardList.init();
 	}
