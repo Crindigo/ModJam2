@@ -3,7 +3,10 @@ package com.crindigo.minetcg;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.crindigo.minetcg.card.CardList;
@@ -51,6 +54,9 @@ public class MineTCG
 	public void load(FMLInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+		
+		WeightedRandomChestContent item = new WeightedRandomChestContent(par1, par2, par3, par4, par5)
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, item);
 		
 		CardList.init();
 	}
