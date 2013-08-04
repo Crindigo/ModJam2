@@ -40,6 +40,11 @@ public class CardRegistry
 		return instance.cards.get(id);
 	}
 	
+	public static boolean has(String id)
+	{
+		return instance.cards.containsKey(id);
+	}
+	
 	public static Card getRandom()
 	{
 		WeightedRandomCard rndCard = 

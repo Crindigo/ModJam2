@@ -17,10 +17,14 @@ import com.crindigo.minetcg.item.TCGItems;
 import com.crindigo.minetcg.util.RandomCardChestContent;
 
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -43,22 +47,34 @@ public class MineTCG
 	
 	private Configuration config;
 	
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		Config.init(event.getSuggestedConfigurationFile());
 		TCGItems.init();
 		
-		GameRegistry.addShapedRecipe(new ItemStack(TCGItems.deck), "wbw", "wpw", "w w", 
-				'w', Block.woodSingleSlab, 'b', Block.fenceIron, 'p', Item.paper);
+		
 	}
 	
+	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 		
-		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, 
-				new RandomCardChestContent(null, 0, 0, 0));
+		GameRegistry.addShapedRecipe(new ItemStack(TCGItems.deck), "wbw", "wpw", "w w", 
+				'w', Block.woodSingleSlab, 'b', Block.fenceIron, 'p', Item.paper);
 		
+		WeightedRandomChestContent content = new WeightedRandomChestContent(new ItemStack(TCGItems.card), 1, 1, 5);
+		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, content);
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, content);
+
 		CardList.init();
+	}
+	
+	@EventHandler
+	public void handleIMC(IMCEvent event)
+	{
+		// perhaps allow other mods to register cards (images could be a problem)
+		
 	}
 }

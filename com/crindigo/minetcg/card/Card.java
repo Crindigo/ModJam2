@@ -224,8 +224,11 @@ public class Card
 		if ( !stack.hasTagCompound() || !stack.getTagCompound().hasKey("tcgCard") ) {
 			return null;
 		}
-		
+
 		NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("tcgCard");
+		if ( !CardRegistry.has(nbt.getString("Id")) ) {
+			return null;
+		}
 		
 		Card card = CardRegistry.get(nbt.getString("Id")).copy();
 		card.stats.level = nbt.getShort("Lv");
