@@ -91,6 +91,13 @@ public class Card
 			this.curHealth = this.health;
 		}
 		
+		public Stats(int power, int defense, int health, short level, int experience)
+		{
+			this(power, defense, health);
+			this.level = level;
+			this.experience = experience;
+		}
+		
 		private void levelUp()
 		{
 			if ( level >= 10 ) {
@@ -113,6 +120,11 @@ public class Card
 					break;
 				}
 			}
+		}
+		
+		public Stats copy()
+		{
+			return new Stats(power, defense, health, level, experience);
 		}
 	}
 	
@@ -227,6 +239,6 @@ public class Card
 	
 	public Card copy()
 	{
-		return new Card(id, name, description, rarity, dirs, element, stats);
+		return new Card(id, name, description, rarity, dirs, element, stats.copy());
 	}
 }
